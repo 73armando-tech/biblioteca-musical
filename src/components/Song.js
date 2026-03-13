@@ -2,13 +2,14 @@ import React, { Component } from "react";
 
 class Song extends Component {
   render() {
-    const { title, artist, duration } = this.props;
+    const {number, title, artist, duration } = this.props;
 
     return (
       <div className="song">
-        <h3>{title}</h3>
-        <p><strong>Artista:</strong> {artist}</p>
-        <p><strong>Duración:</strong> {duration}</p>
+        <p>{number}</p>
+        <span className="title">{title}</span>
+        <span className="artist">{artist}</span>
+        <span className="duration">{duration}</span>
       </div>
     );
   }
