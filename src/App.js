@@ -1,76 +1,47 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
-import Song from "./components/Song";
+import SearchResults from "./components/SearchResults";
+import Library from "./components/Library";
 import "./App.css";
 
-class App extends Component {
+function App() {
+  const [searchResults, setSearchResults] = useState([
+    { id: 1, title: "Juno", artist: "Sabrina Carpenter", duration: "3:43" },
+    { id: 2, title: "Manchild", artist: "Sabrina Carpenter", duration: "3:33" },
+    { id: 3, title: "Espresso", artist: "Sabrina Carpenter", duration: "2:55" },
+    { id: 4, title: "Opalite", artist: "Taylor Swift", duration: "3:55" },
+    { id: 5, title: "The Fate Of Ophelia", artist: "Taylor Swift", duration: "3:46" },
+    { id: 6, title: "Chiquita", artist: "Kaia Lana", duration: "3:05" },
+    { id: 7, title: "Soporten", artist: "Kaia Lana", duration: "2:56" },
+    { id: 8, title: "On My Way", artist: "Alan Walker feat. Sabrina Carpenter", duration: "5:01" }
+  ]);
 
-  componentDidMount() {
-    console.log("La aplicación se ha cargado correctamente");
-  }
+  const [library, setLibrary] = useState([]);
 
-  render() {
-    return (
-      <div className="App">
-        <Header />
+  const addToLibrary = (song) => {
+    if (!library.find((s) => s.id === song.id)) {
+      setLibrary([...library, song]);
+    }
+  };
 
-        <div className="song-list">
-          <Song 
-            number="1"
-            title="Manchild"
-            artist="Sabrina Carpenter"
-            duration="3:33"
-          />
+  useEffect(() => {
+    console.log("Biblioteca actualizada:", library);
+  }, [library]);
 
-          <Song 
-            number="2"
-            title="Espresso"
-            artist="Sabrina Carpenter"
-            duration="2:55"
-          />
+  return (
+    <div className="App">
+      <Header />
 
-          <Song  
-            number="3"
-            title="Juno"
-            artist="Sabrina Carpenter"
-            duration="3:43"
-          />
+      <div className="container">
+        <SearchResults 
+          songs={searchResults} 
+          onAdd={addToLibrary} 
+        />
 
-          <Song 
-            number="4"
-            title="The Fate Of Ophelia"
-            artist="Taylor Swift"
-            duration="3:46"
-          />
-          <Song 
-            number="5"
-            title="Opalite"
-            artist="Taylor Swift"
-            duration="3:55"
-          />
-          <Song 
-            number="6"
-            title="On My Way"
-            artist="Alan Walker feat. Sabrina Carpenter"
-            duration="5:01"
-          />
-          <Song 
-            number="7"
-            title="Chiquita"
-            artist="Kaia Lana feat. Paty Cantú"
-            duration="3:05"
-          />
-          <Song 
-            number="8"
-            title="Soporten"
-            artist="Kaia Lana"
-            duration="2:56"
-          />
-        </div>
-
+        <Library songs={library} />
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;

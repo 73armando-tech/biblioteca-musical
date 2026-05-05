@@ -21,20 +21,18 @@ header {
 }
 
 .song {
-   display: grid;
-  grid-template-columns: 1fr 3fr 3fr 60px;
-
+ 
+  display: grid;
+  grid-template-columns: .5fr 3fr 3fr 1fr;
   align-items: center;
-
+  justify-items: start;
+  width: 80%;
+  margin: 0 auto;
   padding: 16px 20px;
   margin-bottom: 12px;
-
   background: #1e1e1e;
   border-radius: 10px;
-
   transition: background 0.2s ease, transform 0.15s ease;
-
-  cursor: pointer;
 }
 .artist {
     font-size: .8rem;
@@ -46,4 +44,45 @@ header {
 .song:hover {
   transform: scale(1.02);
   background: #282828;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin: 0 50px;
+  align-items: start;
+}
+
+.btnAdd {
+  background-color: rgb(184, 49, 49);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.btnAdd:hover {
+  background-color: rgb(199, 102, 102);
+  transition: background-color 0.5s ease;
+}
+
+.resultCntr {
+  padding: 40px;
+  margin: auto;
+  width: 90%;
+}
+
+.libCntr {
+  padding: 40px;
+  width: 90%;
+  height: 100%;
+  margin: auto;
+}
+
+.library .song {
+  grid-template-columns: .5fr 3fr 1fr auto;
 }

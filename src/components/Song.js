@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 
-class Song extends Component {
-  render() {
-    const {number, title, artist, duration } = this.props;
+function Song({ index, title, artist, duration, onAdd }) {
+  return (
+    <div className="song">
+  <span className="index">{index}</span>
 
-    return (
-      <div className="song">
-        <p>{number}</p>
-        <span className="title">{title}</span>
-        <span className="artist">{artist}</span>
-        <span className="duration">{duration}</span>
-      </div>
-    );
-  }
+  <div className="info">
+    <span className="title">{title}</span>
+    <span className="artist">{artist}</span>
+  </div>
+
+  <span className="duration">{duration}</span>
+
+  {onAdd && 
+    <button className="btnAdd" onClick={onAdd}>+</button>
+    }
+</div>
+  );
 }
 
 export default Song;
