@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import Header from "./components/Header";
+import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Library from "./components/Library";
+import SongDetail from "./components/SongDetail";
+
+import useFetch from "./hooks/useFetch";
+import { Link } from "react-router-dom";
+
 import "./App.css";
 
 function App() {
-  const [searchResults, setSearchResults] = useState([
+  const [searchResults] = useState([
     { id: 1, title: "Juno", artist: "Sabrina Carpenter", duration: "3:43" },
     { id: 2, title: "Manchild", artist: "Sabrina Carpenter", duration: "3:33" },
     { id: 3, title: "Espresso", artist: "Sabrina Carpenter", duration: "2:55" },
@@ -17,6 +25,13 @@ function App() {
   ]);
 
   const [library, setLibrary] = useState([]);
+  const [artist, setArtist] = useState("Sabrina Carpenter");
+
+  const url = `https://www.theaudiodb.com/api/v1/json/2/searchalbum.php?s=${artist}`;
+
+  console.log(url);
+
+  const { data, loading, error } = useFetch(url);
 
   const addToLibrary = (song) => {
     if (!library.find((s) => s.id === song.id)) {
@@ -24,23 +39,63 @@ function App() {
     }
   };
 
+  const handleSearch = (artistName) => {
+    setArtist(artistName);
+  };
+
   useEffect(() => {
     console.log("Biblioteca actualizada:", library);
   }, [library]);
 
   return (
-    <div className="App">
-      <Header />
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="App">
+            <Header />
 
-      <div className="container">
-        <SearchResults 
-          songs={searchResults} 
-          onAdd={addToLibrary} 
-        />
+            <SearchBar onSearch={handleSearch} />
 
-        <Library songs={library} />
-      </div>
-    </div>
+            {loading && <p>Cargando...</p>}
+
+            {error && <p>{error}</p>}
+
+            {data?.album && (
+              <div className="albums">
+                <h2>Resultados</h2>
+
+                {data.album.map((album) => (
+                  <Link
+                    to={`/song/${album.idAlbum}`}
+                    key={album.idAlbum}
+                    className="song"
+                  >
+                    <div>{album.strAlbum}</div>
+                    <div>{album.strArtist}</div>
+                    <div>{album.intYearReleased}</div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            <div className="container">
+              <SearchResults
+                songs={searchResults}
+                onAdd={addToLibrary}
+              />
+
+              <Library songs={library} />
+            </div>
+          </div>
+        }
+      />
+
+      <Route
+        path="/song/:id"
+        element={<SongDetail />}
+      />
+    </Routes>
   );
 }
 
