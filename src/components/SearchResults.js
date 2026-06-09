@@ -1,19 +1,35 @@
-import Song from "./Song";
+import { Link } from "react-router-dom";
 
-function SearchResults({ songs, onAdd }) {
+function SearchResults({ albums, onAdd }) {
   return (
     <div className="resultCntr">
       <h2>Resultados</h2>
 
-      {songs.map((song, index) => (
-        <Song
-          key={song.id}
-          index={index + 1}
-          title={song.title}
-          artist={song.artist}
-          duration={song.duration}
-          onAdd={() => onAdd(song)}
-        />
+      {albums.map((album, index) => (
+        <div key={album.idAlbum} className="song">
+          <span className="index">{index + 1}</span>
+
+          <Link
+            to={`/song/${album.idAlbum}`}
+            className="info"
+          >
+            <span className="title">{album.strAlbum}</span>
+            <span className="artist">{album.strArtist}</span>
+          </Link>
+
+          <span className="duration">
+            {album.intYearReleased}
+          </span>
+
+          {onAdd && (
+            <button
+              className="btnAdd"
+              onClick={() => onAdd(album)}
+            >
+              +
+            </button>
+          )}
+        </div>
       ))}
     </div>
   );

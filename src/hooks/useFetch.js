@@ -6,9 +6,12 @@ function useFetch(url) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!url) return;
+
     const fetchData = async () => {
       try {
         setLoading(true);
+        setError(null);
 
         const response = await fetch(url);
 
