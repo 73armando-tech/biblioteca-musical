@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
 function SongDetail() {
@@ -8,11 +9,19 @@ function SongDetail() {
 
   const { data, loading, error } = useFetch(url);
 
-  if (loading) {
+  const tracksUrl = `https://www.theaudiodb.com/api/v1/json/2/track.php?m=${id}`;
+
+  const {
+    data: tracksData,
+    loading: tracksLoading,
+    error: tracksError,
+  } = useFetch(tracksUrl);
+
+  if (loading || tracksLoading) {
     return <p>Cargando detalles...</p>;
   }
 
-  if (error) {
+  if (error || tracksError) {
     return <p>Error al cargar la información.</p>;
   }
 
@@ -23,35 +32,57 @@ function SongDetail() {
   }
 
   return (
-    <div className="songDetail">
-      <h2>{album.strAlbum}</h2>
+    <>
+      <Link to="/" className="backBtn">
+        Volver
+      </Link>
 
-      <p>
-        <strong>Artista:</strong> {album.strArtist}
-      </p>
+      <div className="songDetail">
+        <h2>{album.strAlbum}</h2>
 
-      <p>
-        <strong>Año:</strong> {album.intYearReleased}
-      </p>
+        <p>
+          <strong>Artista:</strong> {album.strArtist}
+        </p>
 
-      <p>
-        <strong>Género:</strong> {album.strGenre}
-      </p>
+        <p>
+          <strong>Año:</strong> {album.intYearReleased}
+        </p>
 
-      <p>
-        <strong>Tipo:</strong> {album.strReleaseFormat}
-      </p>
+        <p>
+          <strong>Género:</strong> {album.strGenre}
+        </p>
 
-      {album.strAlbumThumb && (
-        <img
-          src={album.strAlbumThumb}
-          alt={album.strAlbum}
-          width="250"
-        />
-      )}
+        <p>
+          <strong>Tipo:</strong> {album.strReleaseFormat}
+        </p>
 
-      <p>{album.strDescriptionEN}</p>
-    </div>
+        {album.strAlbumThumb && (
+          <img
+            src={album.strAlbumThumb}
+            alt={album.strAlbum}
+            width="250"
+          />
+        )}
+
+        <p>
+          {album.strDescription || "Sin descripción disponible."}
+        </p>
+
+        <h3>Canciones</h3>
+
+        {tracksData?.track ? (
+          <ol>
+            {tracksData.track.map((track) => (
+              <li key={track.idTrack}>
+                {track.strTrack}
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p>No se encontraron canciones.</p>
+        )}
+      </div>
+    </>
   );
 }
 
