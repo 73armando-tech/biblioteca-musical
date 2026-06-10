@@ -1,117 +1,182 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #121212;
+  background: linear-gradient(180deg, #181818, #121212);
   margin: 0;
   color: white;
 }
 
 header {
-  background-color: rgb(184, 49, 49);
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-}
+  position: relative;
 
-.song-list {
-  padding: 40px;
-  max-width: 900px;
-  margin: auto;
-  
-}
+  background: linear-gradient(135deg,
+      rgb(184, 49, 49),
+      rgb(120, 25, 25));
 
-.song {
- 
-  display: grid;
-  grid-template-columns: .5fr 3fr 3fr 1fr;
+  padding: 30px 20px;
+
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-items: start;
-  width: 80%;
-  margin: 0 auto;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  background: #1e1e1e;
-  border-radius: 10px;
-  transition: background 0.2s ease, transform 0.15s ease;
-}
-.artist {
-    font-size: .8rem;
-    display: flex;
-    align-items: center;
-    color: #b3b3b3;
-  }
 
-.song:hover {
-  transform: scale(1.02);
-  background: #282828;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.logoContainer {
+  position: absolute;
+  left: 30px;
+
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  transition: transform .3s ease;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .3));
+
+}
+
+.logo:hover {
+  transform: scale(1.08);
+}
+
+.headerContent {
+  text-align: center;
+}
+
+.headerContent h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.headerContent p {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  margin: 0 50px;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  margin: 30px 50px;
   align-items: start;
+}
+
+.resultCntr,
+.libCntr {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.resultCntr h2,
+.libCntr h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.song {
+  display: grid;
+  grid-template-columns: 40px 56px 1fr 90px 50px;
+  align-items: center;
+  gap: 16px;
+
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+
+  background: #1e1e1e;
+  border-radius: 12px;
+
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.albumThumb {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.song:hover {
+  transform: scale(1.01);
+  background: #282828;
+}
+
+.index {
+  color: #b3b3b3;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.artist {
+  font-size: 0.85rem;
+  color: #b3b3b3;
+  margin-top: 4px;
+}
+
+.duration {
+  color: #b3b3b3;
+  font-size: 0.9rem;
 }
 
 .btnAdd {
   background-color: rgb(184, 49, 49);
   color: white;
   border: none;
-  width: 40px;
-  height: 40px;
-  padding: 10px 10px;
-  font-size: 16px;
+  width: 38px;
+  height: 38px;
+  font-size: 18px;
   cursor: pointer;
   border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
 .btnAdd:hover {
   background-color: rgb(199, 102, 102);
-  transition: background-color 0.5s ease;
-}
-
-.resultCntr {
-  padding: 40px;
-  margin: auto;
-  width: 90%;
-}
-
-.libCntr {
-  padding: 40px;
-  width: 90%;
-  height: 100%;
-  margin: auto;
+  transform: scale(1.08);
 }
 
 .library .song {
-  grid-template-columns: .5fr 3fr 1fr auto;
-}
-
-.albums {
-  padding: 20px;
-}
-
-.albums .song {
-  display: grid;
-  grid-template-columns: 3fr 2fr 1fr;
-  gap: 20px;
+  grid-template-columns: 40px 56px 1fr 80px;
 }
 
 .songDetail {
   max-width: 900px;
   margin: 40px auto;
   padding: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
 }
 
 .songDetail img {
   display: block;
   margin: 20px 0;
-  border-radius: 10px;
+  border-radius: 12px;
+}
+
+.songDetail ol {
+  padding-left: 22px;
+}
+
+.songDetail li {
+  padding: 10px 0;
+  border-bottom: 1px solid #2a2a2a;
 }
 
 .backBtn {
   display: inline-block;
-  margin: 20px;
+  margin: 24px 50px 0;
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -119,4 +184,253 @@ header {
 
 .backBtn:hover {
   color: rgb(184, 49, 49);
+}
+
+
+.albumHeader {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.albumCover {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+}
+
+.albumInfo h2 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.albumInfo p {
+  color: #b3b3b3;
+  margin-top: 10px;
+}
+
+.albumDescription {
+  line-height: 1.7;
+  color: #d0d0d0;
+}
+
+.songDetail h3 {
+  margin-top: 40px;
+}
+
+.songDetail li {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  transition: background .2s ease;
+}
+
+.songDetail li:hover {
+  background: #1e1e1e;
+}
+
+.searchBar {
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  margin: 30px auto;
+}
+
+.searchBar input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 14px 55px 14px 18px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 999px;
+
+  background: #242424;
+  color: white;
+  font-size: 1rem;
+}
+
+.searchBar input::placeholder {
+  color: #9b9b9b;
+}
+
+.searchBar input:focus {
+  box-shadow: 0 0 0 2px rgb(184, 49, 49);
+}
+
+.searchBar button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgb(184, 49, 49);
+  color: white;
+
+  cursor: pointer;
+
+  transition: background .2s ease,
+    transform .2s ease;
+}
+
+.searchBar button:hover {
+  background: rgb(199, 102, 102);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.emptyLibrary {
+  text-align: center;
+  padding: 40px 20px;
+  color: #b3b3b3;
+  border: 1px dashed #333;
+  border-radius: 14px;
+}
+
+
+.emptyLibrary p {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: white;
+}
+
+.emptyLibrary small {
+  color: #9b9b9b;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  color: rgb(184, 49, 49);
+  margin-bottom: 12px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    margin: 20px;
+    gap: 25px;
+  }
+
+  .resultCntr,
+  .libCntr {
+    padding: 22px;
+    width: auto;
+  }
+
+  .song {
+    grid-template-columns: 32px 48px 1fr 70px 44px;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .albumThumb {
+    width: 44px;
+    height: 44px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .artist,
+  .duration {
+    font-size: 0.8rem;
+  }
+
+  .btnAdd {
+    width: 34px;
+    height: 34px;
+  }
+
+  .albumHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .albumCover {
+    width: 180px;
+    height: 180px;
+  }
+
+  .albumInfo h2 {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    padding: 25px 20px;
+  }
+
+  .logoContainer {
+    position: static;
+    margin-bottom: 15px;
+  }
+
+  .logo {
+    width: 70px;
+    height: auto;
+  }
+
+  .headerContent {
+    text-align: center;
+  }
+
+  .headerContent h1 {
+    font-size: 1.8rem;
+  }
+
+  .headerContent p {
+    font-size: 0.9rem;
+    margin-top: 8px;
+  }
+
+  .searchBar {
+    width: 88%;
+  }
+
+  .container {
+    margin: 15px;
+  }
+
+  .song {
+    grid-template-columns: 28px 44px 1fr 40px;
+  }
+
+  .song .duration {
+    display: none;
+  }
+
+  .library .song {
+    grid-template-columns: 28px 44px 1fr;
+  }
+
+  .library .duration {
+    display: none;
+  }
+
+  .resultCntr,
+  .libCntr {
+    padding: 18px;
+  }
+
+  .songDetail {
+    margin: 20px;
+    padding: 22px;
+  }
+
+  .backBtn {
+    margin: 20px;
+  }
 }

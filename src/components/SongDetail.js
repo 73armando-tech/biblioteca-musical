@@ -38,33 +38,32 @@ function SongDetail() {
       </Link>
 
       <div className="songDetail">
-        <h2>{album.strAlbum}</h2>
 
-        <p>
-          <strong>Artista:</strong> {album.strArtist}
-        </p>
+        <div className="albumHeader">
 
-        <p>
-          <strong>Año:</strong> {album.intYearReleased}
-        </p>
+          {album.strAlbumThumb && (
+            <img
+              src={album.strAlbumThumb}
+              alt={album.strAlbum}
+              className="albumCover"
+            />
+          )}
 
-        <p>
-          <strong>Género:</strong> {album.strGenre}
-        </p>
+          <div className="albumInfo">
+            <h2>{album.strAlbum}</h2>
 
-        <p>
-          <strong>Tipo:</strong> {album.strReleaseFormat}
-        </p>
+            <p>
+              {album.strArtist}
+            </p>
 
-        {album.strAlbumThumb && (
-          <img
-            src={album.strAlbumThumb}
-            alt={album.strAlbum}
-            width="250"
-          />
-        )}
+            <p>
+              {album.intYearReleased} • {album.strGenre}
+            </p>
+          </div>
 
-        <p>
+        </div>
+
+        <p className="albumDescription">
           {album.strDescription || "Sin descripción disponible."}
         </p>
 
@@ -81,6 +80,7 @@ function SongDetail() {
         ) : (
           <p>No se encontraron canciones.</p>
         )}
+
       </div>
     </>
   );

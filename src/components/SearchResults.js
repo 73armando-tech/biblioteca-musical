@@ -9,23 +9,23 @@ function SearchResults({ albums, onAdd }) {
         <div key={album.idAlbum} className="song">
           <span className="index">{index + 1}</span>
 
-          <Link
-            to={`/song/${album.idAlbum}`}
-            className="info"
-          >
+          {album.strAlbumThumb && (
+            <img
+              src={album.strAlbumThumb}
+              alt={album.strAlbum}
+              className="albumThumb"
+            />
+          )}
+
+          <Link to={`/song/${album.idAlbum}`} className="info">
             <span className="title">{album.strAlbum}</span>
             <span className="artist">{album.strArtist}</span>
           </Link>
 
-          <span className="duration">
-            {album.intYearReleased}
-          </span>
+          <span className="duration">{album.intYearReleased}</span>
 
           {onAdd && (
-            <button
-              className="btnAdd"
-              onClick={() => onAdd(album)}
-            >
+            <button className="btnAdd" onClick={() => onAdd(album)}>
               +
             </button>
           )}

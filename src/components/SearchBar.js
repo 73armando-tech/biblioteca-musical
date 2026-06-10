@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 function SearchBar({ onSearch }) {
   const [artist, setArtist] = useState("");
@@ -12,7 +13,7 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="searchBar" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Buscar artista..."
@@ -21,7 +22,7 @@ function SearchBar({ onSearch }) {
       />
 
       <button type="submit">
-        Buscar
+        <FaSearch />
       </button>
     </form>
   );
